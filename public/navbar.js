@@ -21,6 +21,11 @@ function NavBar() {
       >
         <ul className="navbar-nav">
           <li className="nav-item">
+            <a className="nav-link" href="#">
+              Home
+            </a>
+          </li>
+          <li className="nav-item">
             <a className="nav-link" href="#/CreateAccount/">
               Create Account
             </a>
@@ -47,7 +52,7 @@ function NavBar() {
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#/alldata/">
-              AllData
+              Account Information
             </a>
           </li>
         </ul>
