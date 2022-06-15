@@ -3,9 +3,9 @@ function Home() {
     <Card
       bgcolor="info"
       txtcolor="light"
-      header="Space Bank Home"
+      header="First Bank of the Moon"
       title="Welcome to the bank"
-      text="Tap the planet to create a new account."
+      text="Click the moon to create a new account."
       body={
         <a type="submit" className="nav-link" href="#/CreateAccount/">
           {" "}

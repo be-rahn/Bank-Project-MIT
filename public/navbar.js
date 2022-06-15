@@ -2,7 +2,7 @@ function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <a className="navbar-brand" href="#">
-        Space Bank
+        First Bank of the Moon
       </a>
       <button
         className="navbar-toggler"
