@@ -103,7 +103,9 @@ function Login() {
                 type="submit"
                 className="btn btn-outline-success btn-sm"
                 onClick={clearForm}
-              ></button>
+              >
+                Log Out
+              </button>
             </div>
           </>
         )
