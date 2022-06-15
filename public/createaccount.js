@@ -1,143 +1,118 @@
 function CreateAccount() {
-    const [show, setShow] = React.useState(true);
-    const [status, setStatus] = React.useState("");
-    const [name, setName] = React.useState("");
-    const [email, setEmail] = React.useState("");
-    const [password, setPassword] = React.useState("");
-    const [buttonStatus, setButtonStatus] = React.useState(true);
-  
-    const ctx = React.useContext(UserContext);
-  
-    function emailValidate(e) {
-      if (email === null) {
-        alert("you cannot leave this field blank");
-        setEmail(e.currentTarget.value);
-      } else {
-        setEmail(e.currentTarget.value);
-      }
+  const [show, setShow] = React.useState(true);
+  const [status, setStatus] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  const ctx = React.useContext(UserContext);
+  const isEnabled = email.length > 0 || password.length > 0 || name.length > 0;
+
+  function validate(field, label) {
+    if (!field) {
+      setStatus("Error: " + label);
+      setTimeout(() => setStatus(""), 3000);
+      return false;
+    } else if (password.length < 8) {
+      setStatus("Error: " + "Password 8 characters");
+      setTimeout(() => setStatus(""), 3000);
+      return false;
     }
-  
-    function nameValidate(e) {
-      if (name === null) {
-        alert("You cannot leave this field blank");
-        setName(e.currentTarget.value);
-      } else {
-        setName(e.currentTarget.value);
-      }
-    }
-  
-    function buttonEnable(e) {
-      if (password === null) {
-        setButtonStatus(true);
-        setPassword(e.currentTarget.value);
-      } else {
-        setButtonStatus(false);
-        setPassword(e.currentTarget.value);
-      }
-    }
-  
-    function validate(field, label) {
-      if (!field) {
-        setStatus("Error: " + label);
-        alert("You cannot leave the field blank: " + label);
-        setTimeout(() => setStatus(""), 3000);
-        return false;
-      } else if (password.length < 8) {
-        alert("Please create a password that is more than 8 characters long");
-        return false;
-      }
-      return true;
-    }
-  
-    function handleCreate() {
-      console.log(name, email, password);
-      if (!validate(name, "name")) return;
-      if (!validate(email, "email")) return;
-      if (!validate(password, "password")) return;
-      ctx.users.push({ name, email, password, balance: "" });
-      setButtonStatus(false);
-      setShow(false);
-    }
-  
-    function clearForm() {
-      setName("");
-      setEmail("");
-      setPassword("");
-      setShow(true);
-      setButtonStatus(true);
-    }
-  
-    return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Card
-          bgcolor="primary"
-          header="Create Account"
-          status={status}
-          body={
-            show ? (
-              <>
-                Name
-                <br />
-                <input
-                  type="input"
-                  className="form-control"
-                  id="name"
-                  placeholder="Enter Name"
-                  value={name}
-                  onChange={nameValidate}
-                />
-                <br />
-                Email Address
-                <br />
-                <input
-                  type="input"
-                  className="form-control"
-                  id="email"
-                  placeholder="Enter Email"
-                  value={email}
-                  onChange={emailValidate}
-                />
-                <br />
-                Password
-                <br />
-                <input
-                  type="password"
-                  className="form-control"
-                  id="password"
-                  placeholder="Enter Password"
-                  value={password}
-                  onChange={buttonEnable}
-                />
-                <br />
-                <button
-                  type="submit"
-                  className="btn btn-light"
-                  disabled={buttonStatus}
-                  onClick={handleCreate}
-                >
-                  Create Account
-                </button>
-              </>
-            ) : (
-              <>
-                <h5>Success</h5>
-                <button
-                  type="submit"
-                  className="btn btn-light"
-                  onClick={clearForm}
-                >
-                  Add another account
-                </button>
-              </>
-            )
-          }
-        />
-      </div>
-    );
+    return true;
   }
+
+  function handleCreate() {
+    console.log(name, email, password);
+    const url = `/account/create/${name}/${email}/${password}`;
+    (async () => {
+      var res = await fetch(url, { method: "post" });
+      var data = await res.json();
+    })();
+    setShow(false);
+  }
+
+  function clearForm() {
+    setName("");
+    setEmail("");
+    setPassword("");
+    setShow(true);
+  }
+
+  return (
+    <Card
+      bgcolor="primary"
+      header="Create Account"
+      status={status}
+      body={
+        show ? (
+          <>
+            Name
+            <br />
+            <input
+              type="text"
+              className="form-control"
+              id="name"
+              placeholder="Enter name"
+              value={name}
+              minlength="2"
+              required
+              onChange={(e) => setName(e.currentTarget.value)}
+            />
+            <br />
+            Email address
+            <br />
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              placeholder="Enter email"
+              value={email}
+              pattern=".+@gmail\.com"
+              size="30"
+              required
+              onChange={(e) => setEmail(e.currentTarget.value)}
+            />
+            <br />
+            Password
+            <br />
+            <input
+              type="password"
+              className="form-control"
+              id="password"
+              placeholder="Enter password"
+              value={password}
+              minlength="8"
+              required
+              onChange={(e) => setPassword(e.currentTarget.value)}
+            />
+            <br />
+            <button
+              type="submit"
+              disabled={!isEnabled}
+              aria-disabled="true"
+              className="btn btn-light"
+              onClick={handleCreate}
+            >
+              Create Account
+            </button>
+          </>
+        ) : (
+          <>
+            <div class="alert alert-success" role="alert">
+              <h4 class="alert-heading"></h4>
+              <p>Success!</p>
+
+              <button
+                type="submit"
+                className="btn btn-outline-success btn-sm"
+                onClick={clearForm}
+              >
+                Create another account
+              </button>
+            </div>
+          </>
+        )
+      }
+    />
+  );
+}
