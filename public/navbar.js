@@ -2,7 +2,7 @@ function NavBar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
       <a className="navbar-brand" href="#">
-        Donut Bank
+        Space Bank
       </a>
       <button
         className="navbar-toggler"
