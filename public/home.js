@@ -1,22 +1,21 @@
 function Home() {
-    return (
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Card
-          bgcolor="info"
-          txtcolor="black"
-          header="Bad Bank"
-          title="Welcome to Bad Bank"
-          text="Please create an account and then login in to make transactions. Your information may be shared by us to anyone at anytime. 😏"
-          body={
-            <img src="bank.png" className="img-fluid" alt="Responsive image" />
-          }
-        />
-      </div>
-    );
-  }
+  return (
+    <Card
+      bgcolor="info"
+      txtcolor="light"
+      header="Space Bank Home"
+      title="Welcome to the bank"
+      text="Tap the planet to create a new account."
+      body={
+        <a type="submit" className="nav-link" href="#/CreateAccount/">
+          {" "}
+          <img
+            src="planet.png"
+            className="img-fluid"
+            alt="Responsive image"
+          />{" "}
+        </a>
+      }
+    />
+  );
+}
