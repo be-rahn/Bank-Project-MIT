@@ -13,6 +13,7 @@ body {
   background-image: url("moonland2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
 
 .card {
