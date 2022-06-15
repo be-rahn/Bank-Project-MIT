@@ -4,7 +4,7 @@ function AllData() {
   return (
     <Card
       bgcolor="primary"
-      header="AllData"
+      header="Account Information"
       body={
         <>
           <p>Name: {JSON.stringify(ctx.users[0].name)}</p>
