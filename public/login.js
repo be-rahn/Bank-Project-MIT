@@ -97,7 +97,7 @@ function Login() {
           <>
             <div class="alert alert-success" role="alert">
               <h4 class="alert-heading"></h4>
-              <p>Success!</p>
+              <p>Success! You are now logged in.</p>
 
               <button
                 type="submit"
