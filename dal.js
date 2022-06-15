@@ -1,5 +1,5 @@
 const { MongoClient, ServerApiVersion } = require("mongodb");
-const url = process.env.MONGO_DB_URI;
+const url = process.env.MONGODB_URI;
 let db = null;
 
 MongoClient.connect(
