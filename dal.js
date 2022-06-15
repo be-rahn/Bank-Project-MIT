@@ -1,22 +1,18 @@
-
-
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost:27017/bank-project-mit",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
-
-const MongoClient = require("mongodb").MongoClient;
-const url = "mongodb://localhost:27017";
+const { MongoClient, ServerApiVersion } = require("mongodb");
+const url = process.env.MONGO_DB_URI;
 let db = null;
 
-MongoClient.connect(url, { useUnifiedTopology: true }, function (err, client) {
-  console.log("Connected successfully to db server");
+MongoClient.connect(
+  url,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  function (err, client) {
+    console.log("Connected successfully to db server");
 
-  db = client.db("myproject");
-});
+    // connect to my project database
+    db = client.db("myproject");
+    collection = db.collection("users");
+  }
+);
 
 function create(name, email, password) {
   return new Promise((resolve, reject) => {
