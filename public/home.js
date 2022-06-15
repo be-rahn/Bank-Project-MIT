@@ -10,7 +10,7 @@ function Home() {
         <a type="submit" className="nav-link" href="#/CreateAccount/">
           {" "}
           <img
-            src="planet.png"
+            src="moon.png"
             className="img-fluid"
             alt="Responsive image"
           />{" "}
