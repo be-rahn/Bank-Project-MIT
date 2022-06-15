@@ -1,26 +1,18 @@
 function AllData() {
-    const ctx = React.useContext(UserContext);
-    return (
-      <>
-        {ctx.users.map((ctx, i) => (
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Card
-              key={i}
-              bgcolor="info"
-              txtcolor="gray"
-              header={"Account information for: " + ctx.name}
-              title={"Balance: $" + ctx.balance}
-              text={"Email: " + ctx.email}
-              body={"Password: " + ctx.password}
-            />
-          </div>
-        ))}
-      </>
-    );
-  }
+  const ctx = React.useContext(UserContext);
+
+  return (
+    <Card
+      bgcolor="primary"
+      header="AllData"
+      body={
+        <>
+          <p>Name: {JSON.stringify(ctx.users[0].name)}</p>
+          <p>Email: {JSON.stringify(ctx.users[0].email)}</p>
+          <p>Password: {JSON.stringify(ctx.users[0].password)}</p>
+          <p>Balance: ${JSON.stringify(ctx.users[0].balance)}</p>
+        </>
+      }
+    />
+  );
+}
